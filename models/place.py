@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """a city model"""
 from django.db import models
-from basemodel import BaseModel
-from city import City
+from .basemodel import BaseModel
+from .city import City
 
 
 class Place(BaseModel):

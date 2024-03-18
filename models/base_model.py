@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 
 
-class BaseModel:
+class BaseModel(models.Model):
     """A base model for Django models providing common attributes and methods.
     it inherits from the models.Model, the base class for all django models
     Attributes:
@@ -20,8 +20,8 @@ class BaseModel:
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    #class Meta:
-        #abstract = True
+    class Meta:
+        abstract = True
 
     
     def save(self, *args, **kwargs):
@@ -54,4 +54,4 @@ class BaseModel:
         Returns:
             str: A string representation containing the class name, id, and attribute dictionary.
         """
-        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}
+        return f"[{self.__class__.__name__}] ({self.id})"

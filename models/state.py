@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """a state model"""
 from django.db import models
-from basemodel import BaseModel
+from .basemodel import BaseModel
 
 class State(BaseModel):
     """
