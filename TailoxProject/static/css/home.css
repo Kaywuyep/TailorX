@@ -9,7 +9,7 @@ header {
     text-align: center;
     display: flex;
 }
-header h1 a {
+header h1 {
 	color: blue;
 	font-family: "Times New Roman", Times, serif;
 }
@@ -18,7 +18,7 @@ p {
     font-size: 16px;
     line-height: 1.5;
     color: black; /* Text color */
-    /*margin-bottom: 18px; Bottom margin */
+    margin-bottom: 18px; /* Bottom margin */
 }
 
 body {
