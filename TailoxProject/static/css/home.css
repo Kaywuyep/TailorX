@@ -4,7 +4,7 @@ header {
     top: 0; /* Align the header to the top */
     left: 0; /* Align the header to the left */
     width: 100%; /* Make the header take the full width of the viewport */
-    background-color: blue;
+    background-color: white;
     padding: 20px;
     text-align: center;
 }
@@ -16,6 +16,6 @@ footer {
     left: 0; /* Align the footer to the left */
     width: 100%; /* Make the footer take the full width of the viewport */
     background-color: red;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
 }
