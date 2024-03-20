@@ -7,8 +7,24 @@ header {
     background-color: white;
     padding: 20px;
     text-align: center;
+    display: flex;
+}
+header h1 a {
+	color: blue;
+	font-family: "Times New Roman", Times, serif;
+}
+p {
+    font-family: italic; /* Italics font family */
+    font-size: 16px;
+    line-height: 1.5;
+    color: black; /* Text color */
+    /*margin-bottom: 18px; Bottom margin */
 }
 
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 18px;
+}
 /* Styles for footer */
 footer {
     position: fixed; /* Position the footer at the bottom of the viewport */
