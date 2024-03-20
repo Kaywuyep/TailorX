@@ -1,4 +1,9 @@
+/* Styles for header */
 header {
+    position: fixed; /* Position the header at the top of the viewport */
+    top: 0; /* Align the header to the top */
+    left: 0; /* Align the header to the left */
+    width: 100%; /* Make the header take the full width of the viewport */
     background-color: blue;
     padding: 20px;
     text-align: center;
@@ -6,6 +11,10 @@ header {
 
 /* Styles for footer */
 footer {
+    position: fixed; /* Position the footer at the bottom of the viewport */
+    bottom: 0; /* Align the footer to the bottom */
+    left: 0; /* Align the footer to the left */
+    width: 100%; /* Make the footer take the full width of the viewport */
     background-color: red;
     padding: 20px;
     text-align: center;
