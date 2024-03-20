@@ -1,0 +1,12 @@
+header {
+    background-color: blue;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Styles for footer */
+footer {
+    background-color: red;
+    padding: 20px;
+    text-align: center;
+}
