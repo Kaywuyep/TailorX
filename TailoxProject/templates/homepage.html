@@ -1,5 +1,4 @@
 {% load static %}
-{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +12,6 @@
         <h1>TAILORX</h1>
         <p> Get Your Tailored Experience</p>
     </header>
-    <div>
-	    <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
-	    <p>{{ post.body }}</p>
-    </div>
     <footer>
         <p>&copy; 2024 TailorX. All rights reserved.</p>
     </footer>
