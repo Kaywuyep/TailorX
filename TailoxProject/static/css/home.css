@@ -8,12 +8,15 @@ header {
     padding: 20px;
     text-align: center;
     display: flex;
+
+    color: blue;
+    font-family: "Times New Roman", Times, serif;
 }
-header h1 {
+/*header h1 {
 	color: blue;
 	font-family: "Times New Roman", Times, serif;
 	text-align: center;
-}
+}*/
 
 body {
 	font-family: 'Source Sans Pro', sans-serif;
