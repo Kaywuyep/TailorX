@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0@@kn55q1kjf)*l1yj=+w^qyn+m2k9jf%q#58+!^-^tj1nqf1&'
+SECRET_KEY = 'django-insecure-=37a46j+kdi@+guh+h$8fyq&1b323g)%3s3#74=)h9b-p3ss&)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -56,7 +55,7 @@ ROOT_URLCONF = 'TailoxProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  #new
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # new
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -119,7 +119,10 @@ class Tailor(BaseModel):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=1024)
+    """
+    this is our database model
+    """
+    title = models.CharField(max_length=200)
     author = models.ForeignKey(
             'auth.User',
             on_delete=models.CASCADE,)
