@@ -14,4 +14,3 @@ class AboutPageView(TemplateView):
 class PostPageView(ListView):
     model = Post
     template_name = 'post.html'
-    context_object_name = 'all_posts_list'
