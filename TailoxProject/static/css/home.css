@@ -14,13 +14,6 @@ header h1 {
 	font-family: "Times New Roman", Times, serif;
 	text-align: center;
 }
-header h1 + p {
-    font-family: italic; /* Italics font family */
-    font-size: 16px;
-    line-height: 1.5;
-    color: black; /* Text color */
-    margin-bottom: 18px; /* Bottom margin */
-}
 
 body {
 	font-family: 'Source Sans Pro', sans-serif;
