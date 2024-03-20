@@ -20,3 +20,7 @@ class PostPageView(ListView):
 class PostDetailView(DetailView):
     model = Post
     template_name = 'post_detail.html'
+
+
+class LoginView(TemplateView):
+    template_name = 'login.html'
