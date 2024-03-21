@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Login</h2>
-{% if form.errors %}
-<p> username and password mismatch. Please try again.</p>
-{% endif %}
+
+<h2>LOGIN TO YOUR ACCOUNT</h2>
 <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
 	<table>
@@ -17,8 +15,14 @@
 		</tr>
 	</table>
         <button type="submit">Login</button>
-</form> 
 
-<p><a href="{% url 'password_reset' %}">Lost Password</a></p>
+	{% if form.errors %}
+	<p> username and password mismatch. Please try again.</p>
+	{% endif %}
+
+	<p class="text-center">Forgot your password <a href="#">Reset Password</a></p>
+		
+	<p class="text-center">Don't have a account? <a href="#">Join Now</a></p>
+</form> 
 
 {% endblock content %}
