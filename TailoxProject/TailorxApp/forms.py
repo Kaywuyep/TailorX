@@ -2,22 +2,24 @@ from django.db import models
 from django.forms import fields
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from .models import Client, Tailor, Picture
 
-class ClientRegistrationForm(forms.Form):
+
+class ClientRegistrationForm(UserCreationForm):
     first_name = forms.CharField(max_length=128)
     last_name = forms.CharField(max_length=128)
 
     class Meta:
-        models = Client
+        model = User
         fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name']
 
-class TailorRegistrationForm(forms.Form):
+class TailorRegistrationForm(UserCreationForm):
     first_name = forms.CharField(max_length=128)
     last_name = forms.CharField(max_length=128)
 
     class Meta:
-        models = Tailor
+        model = User
         fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name']
 
 
