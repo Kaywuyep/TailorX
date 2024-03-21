@@ -19,9 +19,7 @@
 	<p> username and password mismatch. Please try again.</p>
 	{% endif %}
 
-	<p class="text-center">Forgot your password <a href="#">Reset Password</a></p>
-		
-	<p class="text-center">Don't have a account? <a href="#">Join Now</a></p>
+	<p class="text-center">Forgot your password <a href="{% url 'password_reset' %}">Reset Password</a></p>
 </form> 
 
 {% endblock content %}

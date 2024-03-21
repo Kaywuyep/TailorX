@@ -10,6 +10,10 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import ClientRegistrationForm, TailorRegistrationForm
 from django.contrib.auth.views import LogoutView
+from django.contrib.auth.views import (
+    PasswordResetView as DjangoPasswordResetView,
+    PasswordResetConfirmView as DjangoPasswordResetConfirmView,
+)
 # Create your views here.
 
 
@@ -36,13 +40,16 @@ class MyLoginView(LoginView):
     # redirect_authenticated_user = True
 
 
-    def form_invalid(self, form):
-        messages.error(self.request,'Invalid username or password')
-        return self.render_to_response(self.get_context_data(form=form))
-
-
 class MyLogoutView(LogoutView):
     template_name = 'registration/logout.html'
+
+
+class PasswordResetView(DjangoPasswordResetView):
+    template_name = 'password_reset.html'
+
+
+class PasswordResetConfirmView(DjangoPasswordResetConfirmView):
+    template_name = 'password_reset_confirm.html'
 
 
 class ImageRequestView(View):
