@@ -139,6 +139,7 @@ class Picture(models.Model):
     A class representing pictures uploaded by tailors.
     """
     tailor = models.ForeignKey(Tailor, on_delete=models.CASCADE)
+    caption = models.CharField(max_length=200, default="No caption provided")
     image = models.ImageField(upload_to='tailor_pictures')
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
@@ -151,6 +152,10 @@ class Picture(models.Model):
             if self.image.size > max_size:
                 raise ValueError("Image size should be less than 2MB.")
         super(Picture, self).save(*args, **kwargs)
+
+    def __str__(self):
+        """return a string rep of caption"""
+        return self.caption
 
 
 class State(BaseModel):
