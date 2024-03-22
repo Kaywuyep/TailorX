@@ -12,23 +12,30 @@ header {
     color: blue;
     font-family: "Times New Roman", Times, serif;
 }
-/*header h1 {
-	color: blue;
-	font-family: "Times New Roman", Times, serif;
-	text-align: center;
-}*/
-
 /*body {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 18px;
 }*/
+
+body {
+    background-image: url('path_to_your_image.jpg');
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    background-attachment: fixed;
+    /* Set background to cover the entire viewport height */
+    height: 100vh;
+    /* Remove margin and padding to ensure the image covers the entire page */
+    margin: 0;
+    padding: 0;
+}
+
 /* Styles for footer */
 footer {
     position: fixed; /* Position the footer at the bottom of the viewport */
     bottom: 0; /* Align the footer to the bottom */
     left: 0; /* Align the footer to the left */
     width: 100%; /* Make the footer take the full width of the viewport */
-    background-color: red;
+    background-color: white;
     padding: 10px;
     text-align: center;
 }
