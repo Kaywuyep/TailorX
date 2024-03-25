@@ -95,6 +95,8 @@ class Tailor(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=128, blank=False, null=False)
     last_name = models.CharField(max_length=128, blank=False, null=False)
+    location = models.CharField(max_length=255, default='Unknown', blank=False, null=False)
+    tailor_pictures = models.ManyToManyField('Picture', related_name='tailor_pictures', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -118,6 +120,13 @@ class Tailor(BaseModel):
         return f"[Tailor] ({self.user.username}) {self.user.email}"
 
 
+class Message(models.Model):
+    sender = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE)
+    recipient = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    content = models.TextField()
+
+
 class Post(models.Model):
     """
     this is our database model
@@ -138,7 +147,7 @@ class Picture(models.Model):
     """
     A class representing pictures uploaded by tailors.
     """
-    tailor = models.ForeignKey(Tailor, on_delete=models.CASCADE)
+    tailor = models.ForeignKey(Tailor, related_name='pictures', on_delete=models.CASCADE)
     caption = models.CharField(max_length=200, default="No caption provided")
     image = models.ImageField(upload_to='tailor_pictures')
     uploaded_at = models.DateTimeField(auto_now_add=True)

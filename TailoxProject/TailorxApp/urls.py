@@ -3,11 +3,17 @@ from .views import HomePageView, AboutPageView
 from .views import PostPageView, PostDetailView, MyLoginView
 from .views import MyLogoutView, ImageRequestView
 from .views import ClientRegistrationView, TailorRegistrationView
-from .views import PasswordResetView
-from .views import PasswordResetConfirmView
+from .views import PasswordResetView, TailorSearchView
+from .views import PasswordResetConfirmView,  PictureView
+from .views import MessageListView
+from django.views.generic import TemplateView
 
 
 urlpatterns = [
+        path('tailor-portal/', TemplateView.as_view(template_name='tailor-portal.html'), name='tailor_portal'),
+        path('tailors/search/', TailorSearchView.as_view(), name='tailor-search'),
+        path('tailors/<int:tailor_id>/portfolio/', PictureView.as_view(), name='picture'),
+        path('messages/', MessageListView.as_view(), name='messages'),
         path('password-reset-confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
         path('password-reset/', PasswordResetView.as_view(), name='password-reset'),
         path('client/', ClientRegistrationView.as_view(), name='client'),

@@ -1,10 +1,13 @@
 {% block content %}
-<div class="content-section">
+<div class="content-container">
+	<a href="{% url 'home' %}" class="btn btn-outline-primary mb-3 float-right">Back</a>
   <!-- Sign up form -->
-  <form method="POST">
+  <form method="POST" class="signup-form">
     {% csrf_token %}
     <fieldset class="form-group">
-      <legend class="btn btn-medium btn-light">Welcome, we are excited to give you your tailored experience</legend>
+      <h1 class="btn btn-medium btn-light">
+	      Welcome, we are excited to give you your tailored experience
+	      </h1>
       {{ form.as_p }}
       <!-- Custom questions for additional fields -->
       <div class="form-group">
@@ -33,3 +36,36 @@
   </div>
 </div>
 {% endblock content %}
+<style>
+.content-container {
+  text-align: center;
+  margin-top: 50px; /* Adjust as needed */
+}
+
+.signup-form {
+  /*display: inline-block;*/
+  padding: 20px;
+  background-color: #f0f0f0; /* Optional: Add a semi-transparent background */
+}
+.signup-form h1 {
+  color: #333; /* Add your desired text color */
+  font-size: 24px; /* Adjust as needed */
+  margin-bottom: 20px; /* Add some space below the heading */
+}
+
+.signup-form .form-group {
+  margin-bottom: 15px; /* Adjust as needed */
+}
+
+.signup-form button[type="submit"] {
+  font-size: 18px; /* Make the button slightly bigger */
+}
+body {
+	text-align: center;
+}
+/* Back button styles */
+.float-right {
+  float: right;
+  margin-right: 20px;
+}
+</style>

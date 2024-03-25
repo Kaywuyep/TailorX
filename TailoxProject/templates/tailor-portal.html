@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
 		<div>
         <nav class="nav">
 		<i class="icon icon-home"></i>
-                <a href="{%url 'home'%}"><i class="fas fa-scissors"></i> Home</a>
+                <a href="{% url 'logout' %}"><i class="fas fa-scissors"></i>LOGOUT</a>
 	</nav>
 		</div>
 		<div id="introducton">
@@ -25,10 +26,11 @@
     <!-- Search for Tailors by Location -->
     <li class="search-item">
                   <div class="search-tailors">
-                    <form action="/action_page.php" class="search-form d-flex no-margin">
+			  <form action="{% url 'tailor-search' %}" class="search-form d-flex no-margin">
+				  {% csrf_token %}
                       <i class="icon icon-search"></i>
                       <input type="text" id="location-input" placeholder="Enter location" name="search"
-                        class="title-placeholder no-margin text-light ">
+                        
 		      <button onclick="searchTailors()">Search</button>
                     </form>
                   </div>

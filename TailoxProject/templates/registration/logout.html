@@ -9,10 +9,11 @@
 <body>
     <h1>Logout</h1>
     <p>Are you sure you want to logout?</p>
-    <form action="{% url 'logout' %}" method="post">
+    <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
         {% csrf_token %}
         <button type="submit">Logout</button>
     </form>
-    <!-- Add any additional content or functionality here -->
+
+<a href="#" onclick="document.getElementById('logout-form').submit(); return false;">Logout</a>
 </body>
 </html>
