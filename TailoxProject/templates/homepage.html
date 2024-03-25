@@ -104,19 +104,20 @@
     </div>
   </header>
   <section id="billboard" class="padding-large no-padding-top position-relative">
-    <div class="image-holder">
-      <img src="static/img/home2.png" alt="banner" class="banner-image">
-    </div>
-    <div class="banner-content content-light style1 text-center col-md-6">
-      <h2 class="banner-title">
-        Get Your Tailored Experience.
-      </h2>
-      <div class="btn-center">
-	      <a href="{% url 'login' %}" class="btn btn-medium btn-light">Login</a>
-      </div>
-    </div>
+	  <div class="container">
+		  <div class="banner-header">
+			  <div class="banner-content content-light style1 text-center col-md-6">
+				  <h2 class="banner-title">
+					  Get Your Tailored Experience.
+				  </h2>
+				  <div class="btn-center">
+					  <a href="{% url 'login' %}" class="btn btn-medium btn-light">Login</a>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
   </section>
-  <section id="latest-blog" class="padding-large overflow-hidden">
+  <section id="latest-blog" class="padding-large overflow-hidden" style="margin-top: 500px;">
     <div class="container">
       <div class="row">
         <div class="section-header text-center">
@@ -126,16 +127,46 @@
         <div class="row d-flex flex-wrap">
           <article class="col-md-4 post-item">
             <div class="image-holder">
-              <a href="#">Trengy Ankara style
-                <img src="" alt="post" class="post-image">
+              <a href="#">
+                <img src="static/img/woman.jpg" alt="post" class="post-image">
               </a>
             </div>
             <div class="post-content">
               <div class="post-header text-center">
                 <h3 class="post-title">
-                  <a href="#">Best Comfortable Clothes Ideas</a>
+                  <a href="#">Best Comfortable Clothes Ideas For Women</a>
                 </h3>
-                <p></p>
+                <p>A simple free gown that could be worn for any occassion ranging from casual to office wears</p>
+              </div>
+            </div>
+          </article>
+	  <article class="col-md-4 post-item">
+            <div class="image-holder">
+              <a href="#">
+                <img src="static/img/man.jpg" alt="post" class="post-image">
+              </a>
+            </div>
+            <div class="post-content">
+              <div class="post-header text-center">
+                <h3 class="post-title">
+                  <a href="#">Casual Clothing for Men</a>
+                </h3>
+                <p>A sweet, simple and classy look</p>
+              </div>
+            </div>
+          </article>
+          <article class="col-md-4 post-item">
+            <div class="image-holder">
+              <a href="#">
+                <img src="static/img/kid1.jpg" alt="post" class="post-image">
+              </a>
+            </div>
+            <div class="post-content">
+              <div class="post-header text-center">
+                <h3 class="post-title">
+                  <a href="#">Fashionable Clothing for Kids</a>
+                </h3>
+                <p>A simple silk gown to suit any event and for all weather</p>
               </div>
             </div>
           </article>
