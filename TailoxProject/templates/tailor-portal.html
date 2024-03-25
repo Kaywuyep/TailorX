@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailor Portal</title>
+    <!-- Add necessary CSS stylesheets -->
+    <link rel="stylesheet" type="text/css" href="static/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="static/font/icomoon.css">
+    <link rel="stylesheet" type="text/css" href="static/css/vendor.css">
+</head>
+<body>
+	<div class="container">
+		<div>
+        <nav class="nav">
+		<i class="icon icon-home"></i>
+                <a href="{%url 'home'%}"><i class="fas fa-scissors"></i> Home</a>
+	</nav>
+		</div>
+		<div id="introducton">
+            <a href="#">WELCOME {{ request.user | title }}</a>
+	    <p></p>
+		</div>
+    </div>
+    <!-- Search for Tailors by Location -->
+    <li class="search-item">
+                  <div class="search-tailors">
+                    <form action="/action_page.php" class="search-form d-flex no-margin">
+                      <i class="icon icon-search"></i>
+                      <input type="text" id="location-input" placeholder="Enter location" name="search"
+                        class="title-placeholder no-margin text-light ">
+		      <button onclick="searchTailors()">Search</button>
+                    </form>
+                  </div>
+                </li>
+
+    <!-- View Tailor's Portfolio -->
+    <div class="tailor-portfolio">
+        <!-- Portfolio images will be displayed here -->
+    </div>
+
+    <!-- Message the Tailor -->
+    <div class="message-tailor">
+        <textarea id="message-content" placeholder="Type your message"></textarea>
+        <button onclick="sendMessage()">Send Message</button>
+    </div>
+
+    <!-- Upload Images of Work (For Tailors) -->
+    <div class="upload-images">
+        <form id="image-upload-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" id="image-file" name="image" accept="image/*">
+            <input type="text" id="image-title" name="title" placeholder="Image Title">
+            <textarea id="image-description" name="description" placeholder="Image Description"></textarea>
+            <button type="submit">Upload Image</button>
+        </form>
+    </div>
+
+    <!-- Display uploaded image if available -->
+    {% if img_obj %}
+        <h3>Successfully uploaded: {{ img_obj.title }}</h3>
+        <img src="{{ img_obj.image.url }}" alt="{{ img_obj.title }}" style="max-height: 300px;">
+    {% endif %}
+
+
+    <!-- View Messages from Clients (For Tailors) -->
+    <div class="view-messages">
+        <!-- Messages from clients will be displayed here -->
+    </div>
+
+    <!-- JavaScript for functionality -->
+    <script>
+        function searchTailors() {
+            // Retrieve location input
+            const location = document.getElementById('location-input').value;
+            // Perform search/filtering logic and display results
+            // This could involve making an AJAX request to the backend
+        }
+
+        function sendMessage() {
+            // Retrieve message content
+            const messageContent = document.getElementById('message-content').value;
+            // Send message to tailor
+            // This could involve making an AJAX request to the backend
+        }
+
+        // Add JavaScript for image upload functionality
+        // You can use FormData and XMLHttpRequest to send the image data to the backend
+
+        // Add JavaScript for fetching and displaying messages from clients
+        // This could involve making an AJAX request to the backend and updating the HTML with the messages
+    </script>
+</body>
+</html>
