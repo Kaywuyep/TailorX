@@ -64,6 +64,8 @@ class Client(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=128, blank=False, null=False)
     last_name = models.CharField(max_length=128, blank=False, null=False)
+    username = models.CharField(max_length=150, unique=True, blank=False, null=True)
+    address = models.TextField(default='Unknown', blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -95,7 +97,11 @@ class Tailor(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=128, blank=False, null=False)
     last_name = models.CharField(max_length=128, blank=False, null=False)
-    location = models.CharField(max_length=255, default='Unknown', blank=False, null=False)
+    username = models.CharField(max_length=150, unique=True, blank=False, null=True)
+    business_name = models.CharField(max_length=200, unique=True, blank=False, null=True)
+    address = models.TextField(default='Unknown', blank=False, null=False)
+    # location = models.CharField(max_length=255, default='Unknown', blank=False, null=False)
+    location = models.ForeignKey('State', on_delete=models.SET_NULL, null=True, blank=False)
     tailor_pictures = models.ManyToManyField('Picture', related_name='tailor_pictures', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -117,7 +123,7 @@ class Tailor(BaseModel):
         """
         Returns a string representation of the Tailor instance.
         """
-        return f"[Tailor] ({self.user.username}) {self.user.email}"
+        return f"({self.user.username}) {self.user.email}"
 
 
 class Message(models.Model):
