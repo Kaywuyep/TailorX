@@ -24,5 +24,6 @@ urlpatterns = [
         path('post/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
         path('post/', PostPageView.as_view(), name='post'),
         path('about/', AboutPageView.as_view(), name='about'), # new
-        path('', HomePageView.as_view(), name='home'),
+        path('home', HomePageView.as_view(), name='home'),
+        path('', TemplateView.as_view(template_name='landingpage.html'), name='landingpage'),
 ]
