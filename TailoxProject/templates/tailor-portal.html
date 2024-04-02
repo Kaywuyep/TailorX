@@ -1,96 +1,171 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tailor Portal</title>
-    <!-- Add necessary CSS stylesheets -->
-    <link rel="stylesheet" type="text/css" href="static/css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="static/font/icomoon.css">
-    <link rel="stylesheet" type="text/css" href="static/css/vendor.css">
-</head>
-<body>
-	<div class="container">
-		<div>
-        <nav class="nav">
-		<i class="icon icon-home"></i>
-                <a href="{% url 'logout' %}"><i class="fas fa-scissors"></i>LOGOUT</a>
-	</nav>
-		</div>
-		<div id="introducton">
-            <a href="#">WELCOME {{ request.user | title }}</a>
-	    <p></p>
-		</div>
+<html class="has-sidemenu" lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>TailorX | Your Tailored Experience</title>
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="shortcut icon" type="image/x-icon" href="#">
+    <link rel="manifest" href="../static/img/favicons/manifest.json">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="../static/css/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="../static/css/loaders.css/loaders.min.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=PT+Mono%7cPT+Serif:400,400i%7cLato:100,300,400,700,800,900" rel="stylesheet">
+    <link href="../static/css/theme.min.css" rel="stylesheet" />
+    <link href="../static/css/user.min.css" rel="stylesheet" />
+  </head>
+
+  <body class="overflow-hidden-x">
+
+    <nav class="fancynavbar fancynavbar-expand-lg" data-zanim-lg='{"from":{"opacity":1,"x":70},"to":{"opacity":1,"x":0},"ease":"CubicBezier","duration":0.8,"delay":0.3}' data-zanim-xs='{"from":{"opacity":1,"y":-37},"to":{"opacity":1,"y":0},"ease":"CubicBezier","duration":0.8,"delay":0.3}' data-zanim-trigger="scroll" data-exclusive="true">
+	    <div class="fancynavbar-togglerbar"><a class="fancynavbar-brand"><img class="fancynavbar-brand-img" src="../static/img/logo/logo5.png" alt="" width="30" height="30" data-zanim-lg='{"from":{"opacity":0,"x":45},"to":{"opacity":1,"x":0},"ease":"CubicBezier","duration":0.8,"delay":0.4}' data-zanim-trigger="scroll" />
+          <!--You can use icon or text logo as well-->
+          <!--<span class='fab fa-superpowers fs-6'></span>-->
+          <!--<span class='logo-sparrow'>S</span>-->
+        </a>
+	    <div class="fancynavbar-toggler"><svg class="fancynavbar-toggler-icon" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" data-zanim-lg='{"from":{"opacity":0,"x":45},"to":{"opacity":1,"x":0},"ease":"CubicBezier","duration":0.8,"delay":0.5}' data-zanim-trigger="scroll">
+            <path id="path-top" d="M20,25c0,0,22,0,30,0c16,0,18.89,40.71-.15,21.75C38.7,35.65,19.9,16.8,19.9,16.8"></path>
+            <path id="path-middle" d="M20,32h30"></path>
+            <path id="path-bottom" d="M19.9,46.98c0,0,18.8-18.85,29.95-29.95C68.89-1.92,66,38.78,50,38.78c-8,0-30,0-30,0"></path>
+          </svg></div>
+        <div class="fancynavbar-addon fancynavbar-addon-height" data-zanim-lg='{"from":{"opacity":1,"x":45},"to":{"opacity":1,"x":0},"ease":"CubicBezier","duration":0.8,"delay":0.4}' data-zanim-trigger="scroll"><a class="fancynavbar-addon-item" href="#!"><span class="fab fa-twitter"></span></a><a class="fancynavbar-addon-item" href="#languageModal" data-bs-toggle="modal"><span class="font-secondary ls fw-black fs-10 d-block">EN</span></a></div>
+      <div class="fancynavbar-collapse">
+        <ul class="fancynavbar-nav">
+		<li class="fancynav-item"><a class="fancynav-link" href="{% url 'home'%}"><span class="fancynav-link-content">Home</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main min-vh-100" id="top">
+
+      <!-- ============================================-->
+      <!-- Preloader ==================================-->
+      <div class="preloader" id="preloader">
+        <div class="loader">
+          <div class="line-scale-pulse-out-rapid">
+            <div> </div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div> </div>
+          </div>
+        </div>
+      </div><!-- ============================================-->
+      <!-- End of Preloader ===========================-->
+
+
+      <section class="mt-5 mt-lg-0 py-lg-7" id="page-portfolio">
+        <div class="container">
+          <div class="row mb-5 mb-lg-7">
+            <div class="col-lg-6">
+		    <h1 class="text-decoration-underline d-inline fs-5 fs-md-4">Hello {{ tailor.user.username }}</h1>
+		    <p class="mt-3">Experience: {{ tailor.experience }} years</p>
+		    <p class="mt-3">Skills: {{ tailor.skills }}</p>
+		    <p class="mt-3">Certifications: {{ tailor.certifications }}</p>
+            </div>
+          </div>
+	  <h2>Portfolio</h2>
+	  {% if tailor.portfolio_items.exists %}
+	  <div class="row">
+		  {% for picture in tailor.pictures.all %}
+		  <div class="col-md-4">
+			  <img src="{{ picture.image.url }}" alt="{{ picture.caption }}">
+			  <p>{{ picture.caption }}</p>
+		  </div>
+		  {% endfor %}
+	  </div>
+	  {% else %}
+	  <p>This tailor does not have any portfolio items yet.</p>
+	  {% endif %}
+          <ul class="nav font-secondary mb-2" data-filter-nav="data-filter-nav">
+            <li class="nav-item"><a class="nav-link isotope-nav active" href="#!" data-filter="*">all</a></li>
+            <li class="nav-item"><a class="nav-link isotope-nav" href="#!" data-filter=".photography">photography</a></li>
+            <li class="nav-item"> <a class="nav-link isotope-nav" href="#!" data-filter=".studio">videos</a></li>
+          </ul>
+        </div><!-- end of .container-->
+      </section><!-- <section> close ============================-->
+      <!-- ============================================-->
+
+    </main>
+
+       <!--===============================================-->
+    <!--    Footer-->
+    <!--===============================================-->
+    <footer class="footer bg-black text-body-secondary py-4 font-secondary text-center overflow-hidden">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-4 order-lg-2 position-relative"><a class="indicator indicator-up" href="#top"><span class="indicator-arrow indicator-arrow-one" data-zanim-xs='{"from":{"opacity":0,"y":15},"to":{"opacity":1,"y":-5,"scale":1},"ease":"Back.easeOut","duration":0.4,"delay":0.9}'></span><span class="indicator-arrow indicator-arrow-two" data-zanim-xs='{"from":{"opacity":0,"y":15},"to":{"opacity":1,"y":-5,"scale":1},"ease":"Back.easeOut","duration":0.4,"delay":1.05}'></span></a></div>
+          <div class="col-lg-4 text-lg-start mt-4 mt-lg-0">
+		  <p class="fs-10 text-uppercase ls fw-bold mb-0">Copyright &copy; {% now "Y" %} TailorX. All rights reserved</p>
+        </div>
+      </div>
+    </footer>
+
+    <!--===============================================-->
+    <!--    Modal for language selection-->
+    <!--===============================================-->
+    <!-- Modal-->
+    <div class="overflow-hidden">
+      <div class="modal fade fade-in" id="languageModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xs mx-auto" role="document">
+          <div class="modal-content bg-black">
+            <div class="modal-body text-center p-0"><button class="btn-close text-white position-absolute top-0 end-0 times-icon mt-2 me-2 p-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+              <ul class="list-unstyled my-0 py-4 font-secondary">
+                <li><a class="text-white fw-bold pt-1 d-block" href="../#">English</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- Search for Tailors by Location -->
-    <li class="search-item">
-                  <div class="search-tailors">
-			  <form action="{% url 'tailor-search' %}" class="search-form d-flex no-margin">
-				  {% csrf_token %}
-                      <i class="icon icon-search"></i>
-                      <input type="text" id="location-input" placeholder="Enter location" name="search"
-                        
-		      <button onclick="searchTailors()">Search</button>
-                    </form>
-                  </div>
-                </li>
 
-    <!-- View Tailor's Portfolio -->
-    <div class="tailor-portfolio">
-        <!-- Portfolio images will be displayed here -->
-    </div>
-
-    <!-- Message the Tailor -->
-    <div class="message-tailor">
-        <textarea id="message-content" placeholder="Type your message"></textarea>
-        <button onclick="sendMessage()">Send Message</button>
-    </div>
-
-    <!-- Upload Images of Work (For Tailors) -->
-    <div class="upload-images">
-        <form id="image-upload-form" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" id="image-file" name="image" accept="image/*">
-            <input type="text" id="image-title" name="title" placeholder="Image Title">
-            <textarea id="image-description" name="description" placeholder="Image Description"></textarea>
-            <button type="submit">Upload Image</button>
-        </form>
-    </div>
-
-    <!-- Display uploaded image if available -->
-    {% if img_obj %}
-        <h3>Successfully uploaded: {{ img_obj.title }}</h3>
-        <img src="{{ img_obj.image.url }}" alt="{{ img_obj.title }}" style="max-height: 300px;">
-    {% endif %}
-
-
-    <!-- View Messages from Clients (For Tailors) -->
-    <div class="view-messages">
-        <!-- Messages from clients will be displayed here -->
-    </div>
-
-    <!-- JavaScript for functionality -->
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <script src="../static/js/popper/popper1.min.js"></script>
+    <script src="../static/js/bootstrap/bootstrap1.min.js"></script>
+    <script src="../static/js/anchorjs/anchor1.min.js"></script>
+    <script src="../static/js/is/is1.min.js"></script>
+    <script src="../static/js/fontawesome/all1.min.js"></script>
+    <script src="../static/js/lodash/lodash1.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="../static/js/imagesloaded/imagesloaded1.pkgd.js"></script>
+    <script src="../static/js/gsap/gsap1.js"></script>
+    <script src="../static/js/gsap/customEase1.js"></script>
+    <script src="../static/js/gsap/drawSVGPlugin1.js"></script><!-- Global site tag (gtag.js) - Google Analytics-->
+    <script src="../static/js/isotope-layout/isotope.pkgd.min.js"> </script>
+    <script src="../static/js/isotope-packery/packery-mode.pkgd.min.js"> </script>
+    <script src="../static/js/swiper/swiper-bundle.min.js"></script>
+    <script src="../static/js/bigpicture/BigPicture.js"></script>
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-122907869-1"></script>
     <script>
-        function searchTailors() {
-            // Retrieve location input
-            const location = document.getElementById('location-input').value;
-            // Perform search/filtering logic and display results
-            // This could involve making an AJAX request to the backend
-        }
+      window.dataLayer = window.dataLayer || [];
 
-        function sendMessage() {
-            // Retrieve message content
-            const messageContent = document.getElementById('message-content').value;
-            // Send message to tailor
-            // This could involve making an AJAX request to the backend
-        }
-
-        // Add JavaScript for image upload functionality
-        // You can use FormData and XMLHttpRequest to send the image data to the backend
-
-        // Add JavaScript for fetching and displaying messages from clients
-        // This could involve making an AJAX request to the backend and updating the HTML with the messages
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-122907869-1');
     </script>
-</body>
+    <script src="../static/js/theme.js"></script>
+  </body>
+
 </html>
