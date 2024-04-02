@@ -125,7 +125,7 @@ STATICFILES_DIRS = [
        os.path.join(BASE_DIR, 'static'),
 ]
 
-LOGIN_REDIRECT_URL = 'tailor_portal'  #home new
+LOGIN_REDIRECT_URL = 'tailor-portal'  #home new
 LOGIN_URL = 'login'  # new
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'home' #new

@@ -5,12 +5,13 @@ from .views import MyLogoutView, ImageRequestView
 from .views import ClientRegistrationView, TailorRegistrationView
 from .views import PasswordResetView, TailorSearchView
 from .views import PasswordResetConfirmView,  PictureView
-from .views import MessageListView
+from .views import MessageListView, post_login_view
+from .views import TailorPortalView
 from django.views.generic import TemplateView
 
 
 urlpatterns = [
-        path('tailor-portal/', TemplateView.as_view(template_name='tailor-portal.html'), name='tailor_portal'),
+        path('tailor-portal/', TailorPortalView.as_view(), name='tailor-portal'),
         path('tailors/search/', TailorSearchView.as_view(), name='tailor-search'),
         path('tailors/<int:tailor_id>/portfolio/', PictureView.as_view(), name='picture'),
         path('messages/', MessageListView.as_view(), name='messages'),
@@ -21,9 +22,10 @@ urlpatterns = [
         path('image_request/', ImageRequestView.as_view(), name='image_request'),
         path('logout/', MyLogoutView.as_view(), name='logout'),
         path('login/', MyLoginView.as_view(), name='login'),
+        path('post-login/', post_login_view, name='post-login'),
         path('post/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
         path('post/', PostPageView.as_view(), name='post'),
         path('about/', AboutPageView.as_view(), name='about'), # new
-        path('home', HomePageView.as_view(), name='home'),
+        path('home/', HomePageView.as_view(), name='home'),
         path('', TemplateView.as_view(template_name='landingpage.html'), name='landingpage'),
 ]

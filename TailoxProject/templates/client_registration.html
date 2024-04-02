@@ -28,19 +28,22 @@
   </head>
 
   <body class="overflow-hidden-x">
-
 	  <nav class="fancynavbar fancynavbar-expand-lg" data-zanim-lg='{"from":{"opacity":1,"x":70},"to":{"opacity":1,"x":0},"ease":"CubicBezier","duration":0.8,"delay":0.3}' data-zanim-xs='{"from":{"opacity":1,"y":-37},"to":{"opacity":1,"y":0},"ease":"CubicBezier","duration":0.8,"delay":0.3}' data-zanim-trigger="scroll" data-exclusive="true">
-      <div class="fancynavbar-togglerbar" data-onscroll-fade-in="data-onscroll-fade-in"><a class="fancynavbar-brand"><img class="fancynavbar-brand-img" src="../static/img/logo/logo5.png" alt="" width="30" height="30" data-zanim-lg='{"from":{"opacity":0,"x":45},"to":{"opacity":1,"x":0},"ease":"CubicBezier","duration":0.8,"delay":0.4}' data-zanim-trigger="scroll" />
+	    <div class="fancynavbar-togglerbar"><a class="fancynavbar-brand"><img class="fancynavbar-brand-img" src="../static/img/logo/logo5.png" alt="" width="30" height="30" data-zanim-lg='{"from":{"opacity":0,"x":45},"to":{"opacity":1,"x":0},"ease":"CubicBezier","duration":0.8,"delay":0.4}' data-zanim-trigger="scroll" />
         </a>
-	<div class="fancynavbar-addon fancynavbar-addon-height" data-zanim-lg='{"from":{"opacity":1,"x":45},"to":{"opacity":1,"x":0},"ease":"CubicBezier","duration":0.8,"delay":0.4}' data-zanim-trigger="scroll">
-  <li class="fancynavbar-addon-item">
-    <a class="fancynavbar-addon-link" href="{% url 'home' %}" data-bs-toggle="modal">
-      <span class="font-secondary ls fw-black fs-10 d-block">Home</span>
-    </a>
-  </li>
-</div>
+	    <div class="fancynavbar-toggler"><svg class="fancynavbar-toggler-icon" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" data-zanim-lg='{"from":{"opacity":0,"x":45},"to":{"opacity":1,"x":0},"ease":"CubicBezier","duration":0.8,"delay":0.5}' data-zanim-trigger="scroll">
+            <path id="path-top" d="M20,25c0,0,22,0,30,0c16,0,18.89,40.71-.15,21.75C38.7,35.65,19.9,16.8,19.9,16.8"></path>
+            <path id="path-middle" d="M20,32h30"></path>
+            <path id="path-bottom" d="M19.9,46.98c0,0,18.8-18.85,29.95-29.95C68.89-1.92,66,38.78,50,38.78c-8,0-30,0-30,0"></path>
+          </svg></div>
+        <div class="fancynavbar-addon fancynavbar-addon-height" data-zanim-lg='{"from":{"opacity":1,"x":45},"to":{"opacity":1,"x":0},"ease":"CubicBezier","duration":0.8,"delay":0.4}' data-zanim-trigger="scroll"><a class="fancynavbar-addon-item" href="#!"><span class="fab fa-twitter"></span></a><a class="fancynavbar-addon-item" href="#languageModal" data-bs-toggle="modal"><span class="font-secondary ls fw-black fs-10 d-block">EN</span></a></div>
+      <div class="fancynavbar-collapse">
+        <ul class="fancynavbar-nav">
+		<li class="fancynav-item"><a class="fancynav-link" href="{% url 'home'%}"><span class="fancynav-link-content">Home</span></a></li>
+        </ul>
       </div>
-	  </nav>
+    </nav>
+
 	  <main class="main min-vh-100" id="top">
 
       <!-- ============================================-->
@@ -70,18 +73,35 @@
                 <div class="col-sm-8 col-md-6 col-lg-10 col-xl-8" data-zanim-xs='{"delay":0.5,"animation":"slide-right"}' data-zanim-trigger="scroll">
                   <h3 class="display-4 fs-7">Welcome,<br />we are glad to have you join us.</h3>
                   <h6 class="text-danger mt-3">TalorX is specially crafted for you &amp; your tailoring needs</h6>
-                  <form class="mt-5">
+                  <form method="POST" action="{% url 'login' %}" class="mt-5 signup-form">
                     <div class="row gy-4 align-items-center mb-4">
-                      <div class="col-12"><input class="form-control bg-light" type="text" placeholder="Your Name" /></div>
-                      <div class="col-12"><input class="form-control bg-light" type="email" placeholder="Email Address" /></div>
-                      <div class="col-6"><input class="form-control bg-light" type="password" placeholder="Password" /></div>
-                      <div class="col-6"><input class="form-control bg-light" type="password" placeholder="Confirmation" /></div>
+                      <div class="col-12"><input class="form-control form-group bg-light" type="text" name="username" placeholder="Username" /></div>
+                      <div class="col-12"><input class="form-control form-group bg-light" type="email" name="email" placeholder="Email Address" /></div>
+		      <div class="col-6"><input class="form-control form-group bg-light" type="text" name="first_name" placeholder="First Name" required /></div>
+    <div class="col-6"><input class="form-control form-group bg-light" type="text" name="last_name" placeholder="Last Name" required /></div>
+    <div class="col-12"><input class="form-control form-group bg-light" type="text" name="address" placeholder="Address" required /></div>
+    <div class="col-6">
+      <select class="form-select bg-light" aria-label="Select State" required>
+        <option value="">Select State</option>
+        {% for state in states %}
+        <option value="{{ state.id }}">{{ state.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+                      <div class="col-12"><input class="form-control form-group bg-light" type="password" name="password" placeholder="Password" /></div>
+                      <div class="col-12"><input class="form-control form-group bg-light" type="password" name="confirm_password" placeholder="Confirm Password" /></div>
                     </div>
                     <div class="row mb-4 align-items-center">
                       <div class="col-auto d-grid"><input class="btn btn-dark" type="submit" name="submit" value="Create an Account" /></div>
                       <div class="col-sm">
                         <p class="fs-10 text-body mb-0 font-secondary mt-2 mt-lg-0">By signing up, you agree to the <a class="text-black" href="#!">terms and conditions.</a></p>
                       </div>
+		       <div class="align-items-center">
+                              <small class="text-muted">
+                                      Already have an account? <a href="{% url 'login' %}">Login</a>
+                              </small>
+                      </div>
+
                     </div>
                   </form>
                 </div>
@@ -107,9 +127,6 @@
           <div class="col-lg-4 order-lg-2 position-relative"><a class="indicator indicator-up" href="#top"><span class="indicator-arrow indicator-arrow-one" data-zanim-xs='{"from":{"opacity":0,"y":15},"to":{"opacity":1,"y":-5,"scale":1},"ease":"Back.easeOut","duration":0.4,"delay":0.9}'></span><span class="indicator-arrow indicator-arrow-two" data-zanim-xs='{"from":{"opacity":0,"y":15},"to":{"opacity":1,"y":-5,"scale":1},"ease":"Back.easeOut","duration":0.4,"delay":1.05}'></span></a></div>
           <div class="col-lg-4 text-lg-start mt-4 mt-lg-0">
             <p class="fs-10 text-uppercase ls fw-bold mb-0">Copyright &copy; {% now "Y" %} TailorX. All rights reserved</p>
-          </div>
-          <div class="col-lg-4 text-lg-end order-lg-2 mt-2 mt-lg-0">
-            <p class="fs-10 text-uppercase ls fw-bold mb-0">Made with<span class="text-danger fas fa-heart mx-1"></span>by <a class="text-body-secondary" href="https://themewagon.com/" target="_blank">Themewagon</a></p>
           </div>
         </div>
       </div>

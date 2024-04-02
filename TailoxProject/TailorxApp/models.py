@@ -103,6 +103,9 @@ class Tailor(BaseModel):
     # location = models.CharField(max_length=255, default='Unknown', blank=False, null=False)
     location = models.ForeignKey('State', on_delete=models.SET_NULL, null=True, blank=False)
     tailor_pictures = models.ManyToManyField('Picture', related_name='tailor_pictures', blank=True)
+    skills = models.TextField(max_length=1024, null=True, blank=False)
+    experience = models.IntegerField(blank=False, null=True)
+    certifications = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -154,6 +157,8 @@ class Picture(models.Model):
     A class representing pictures uploaded by tailors.
     """
     tailor = models.ForeignKey(Tailor, related_name='pictures', on_delete=models.CASCADE)
+    title = models.CharField(max_length=255, blank=True)
+    category = models.CharField(max_length=255, blank=True)
     caption = models.CharField(max_length=200, default="No caption provided")
     image = models.ImageField(upload_to='tailor_pictures')
     uploaded_at = models.DateTimeField(auto_now_add=True)
@@ -177,7 +182,7 @@ class State(BaseModel):
     """
     A class representing a state in Nigeria.
     """
-    name = models.CharField(max_length=28)
+    name = models.CharField(max_length=100)
 
 
     def __str__(self):
