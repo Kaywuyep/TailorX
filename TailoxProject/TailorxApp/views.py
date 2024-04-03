@@ -44,7 +44,7 @@ class PostDetailView(DetailView):
 
 class MyLoginView(LoginView):
     template_name = 'registration/login.html'
-    print(000000000000000000000000000000)
+    #print(000000000000000000000000000000)
     # redirect_authenticated_user = True
 
     
@@ -59,7 +59,7 @@ def post_login_view(request):
             return redirect(('tailor-portal'))
         else:
             # form = TailorRegistrationForm()
-            print(request.errors)
+            print(request)
             # If the form is invalid, return a bad request response
             return HttpResponseBadRequest("Invalid login credentials")
 
@@ -82,11 +82,11 @@ class TailorPortalView(TemplateView):
             return render(request, 'picture-form.html', {'form': form})
 
 
-class MyLogoutView(LogoutView):
-    template_name = 'registration/logout.html'
+#class MyLogoutView(LogoutView):
+#    template_name = 'registration/logout.html'
 
-    def dispatch(self, request, *args, **kwargs):
-         response = super().dispatch(request, *args, **kwargs)
+def logout_user(request):
+         messages.success(request, ('Hope to See You Soon!!'))
          return redirect('home')
 
 
@@ -160,17 +160,23 @@ class TailorRegistrationView(View):
         }
         return render(request, 'tailor_registration.html', context)
 
-    def post(self, request):
+
+def register_tailor(request):
+    if request.method == "POST":
         form = TailorRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username') # Get the username that is submitted
-            messages.success(request, f'Account created for {username}!') # Show sucess message when account is created
-            return redirect('login')  # Redirect to a success page
-        else:
-            print(form.errors)
-            # TailorRegistrationForm()
-            return render(request, 'tailor_registration.html', {'form': form})
+            password = form.cleaned_data.get('password1')
+            # user = authenticate(username=username, password=password)
+            # login(request, user)
+            messages.success(request, f'Registration successful {username}!, Welcome on board') # Show sucess message when account is created
+            # print(11111111111111111111)
+            return redirect(('login'))  # Redirect to a success page
+    else:
+        #print(request)
+        form = TailorRegistrationForm()
+    return render(request, 'tailor_registration.html', {'form': form})
 
 
 class TailorSearchView(generics.ListAPIView):

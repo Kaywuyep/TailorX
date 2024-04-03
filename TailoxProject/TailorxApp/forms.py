@@ -15,8 +15,10 @@ class ClientRegistrationForm(UserCreationForm):
         fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
 
 class TailorRegistrationForm(UserCreationForm):
-    first_name = forms.CharField(max_length=128)
-    last_name = forms.CharField(max_length=128)
+    first_name = forms.CharField(max_length=50)
+    last_name = forms.CharField(max_length=50)
+    # username = forms.CharField(max_length=150)
+    email = forms.EmailField(max_length=100)
     business_name = forms.CharField(max_length=128)
     address = forms.CharField(max_length=255)
     location = forms.ModelChoiceField(queryset=State.objects.all())
