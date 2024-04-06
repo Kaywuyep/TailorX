@@ -6,11 +6,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from .models import Post, Picture, Message, Tailor, State
-from .forms import UserImageForm
 from django.contrib.auth.views import LoginView
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import ClientRegistrationForm, TailorRegistrationForm
+from .forms import TailorUpdateForm, ProfileUpdateForm, PictureImageForm
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.views import (
     PasswordResetView as DjangoPasswordResetView,
@@ -27,6 +27,13 @@ from .serializers import TailorSerializer, PictureSerializer, MessageSerializer
 
 class HomePageView(TemplateView):
     template_name = 'homepage.html'
+
+
+    def home(self, request):
+        context = {
+            'post': POST.objects.all()
+        }
+        return render(request, homepage.html, context)
 
 
 class AboutPageView(TemplateView):
@@ -70,16 +77,16 @@ def post_login_view(request):
 class TailorPortalView(TemplateView):
     template_name = 'tailor-portal.html'
 
-    def add_portfolio_item(request):
-        if request.method == 'POST':
-            form = PictureForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.save()
+    #def add_portfolio_item(request):
+     #   if request.method == 'POST':
+      #      i_form = PictureImageForm(request.POST, request.FILES)
+       #     if form.is_valid():
+        #        form.save()
                 # ... handle successful upload ...
-                return redirect('tailor-portal')  # Redirect to portfolio page
-        else:
-            form = PictureForm()
-            return render(request, 'picture-form.html', {'form': form})
+         #       return redirect('tailor-portal')  # Redirect to portfolio page
+        #else:
+         #   form = PictureImageForm()
+          #  return render(request, 'picture-form.html', {'form': form})
 
 
 #class MyLogoutView(LogoutView):
@@ -100,25 +107,9 @@ class PasswordResetConfirmView(DjangoPasswordResetConfirmView):
 
 class ImageRequestView(View):
     def get(self, request):
-        form = UserImage()
-        return render(request, 'picture-form.html', {'form': form})
+        form = PictureImageForm()
+        return render(request, 'picture-form.html', {'i_form': i_form})
 
-    def post(self, request):
-        form = UserImageForm(request.POST, request.FILES)
-        if form.is_valid():
-            # Get cleaned image and caption data
-            image = form.cleaned_data['image']
-            caption = form.cleaned_data['caption']
-
-            # Create Picture object with the logged-in tailor (assuming user authentication)
-            picture = Picture.objects.create(tailor=request.user.tailor, image=image, caption=caption)
-
-            # Redirect to a success page or display a success message
-            success_message = "Image uploaded successfully!"
-            return render(request, 'picture-form.html', {'form': form, 'success_message': success_message})
-        else:
-            # Re-render the form with error messages
-            return render(request, 'picture-form.html', {'form': form})
 
 
 class PictureView(generics.ListAPIView):
@@ -177,6 +168,59 @@ def register_tailor(request):
         #print(request)
         form = TailorRegistrationForm()
     return render(request, 'tailor_registration.html', {'form': form})
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        u_form = TailorUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('tailor-portal') # Redirect back to profile page
+
+    else:
+        u_form = TailorUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'tailor-portal.html', context)
+
+
+def tailor_pictures(request):
+    if request.method == 'POST':
+        i_form = PictureImageForm(request.POST, request.FILE)
+        if form.is_valid():
+            i_form.save()
+            picture = i_form.save(commit=False)
+            picture.tailor = request.user  # Assuming user authentication
+            picture.save()
+            # Get cleaned image and caption data
+            image = form.cleaned_data['image']
+            caption = form.cleaned_data['caption']
+
+            # Create Picture object with the logged-in tailor (assuming user authentication)
+            #picture = Picture.objects.create(tailor=request.user, image=image, caption=caption)
+
+            # Redirect to a success page or display a success message
+            success_message = "Image uploaded successfully!"
+            return redirect('picture-form.html')
+    else:
+        i_form = PictureImageForm()
+
+    context = {
+        'i_form': i_form
+    }
+
+    return render(request, 'tailor-portal.html', context)
 
 
 class TailorSearchView(generics.ListAPIView):

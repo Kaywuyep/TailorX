@@ -3,7 +3,7 @@ from django.forms import fields
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Client, Tailor, Picture, State
+from .models import Client, Tailor, Picture, State, Profile
 
 
 class ClientRegistrationForm(UserCreationForm):
@@ -28,12 +28,30 @@ class TailorRegistrationForm(UserCreationForm):
         fields = ['username', 'email', 'first_name', 'last_name', 'business_name', 'address', 'location', 'password1', 'password2']
 
 
-class UserImageForm(forms.Form):
+# Create a UserUpdateForm to update a username and email
+class TailorUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['email']
+
+
+# Create a ProfileUpdateForm to update image.
+class ProfileUpdateForm(forms.ModelForm):
+    skills = forms.CharField(max_length=1024)
+    experience = forms.IntegerField()
+    certifications = forms.CharField()
+
+    class Meta:
+        model = Profile
+        fields = ['image', 'skills', 'experience', 'certifications'] 
+
+
+class PictureImageForm(forms.Form):
     image = forms.ImageField(label="Portfolio Image")
     caption = forms.CharField(max_length=200)
 
-    class meta:  
-        # To specify the model to be used to create form  
-        models = Picture 
-        # It includes all the fields of model  
-        fields = '__all__'
+    class meta:    
+        models = Picture   
+        fields = ['image', 'caption']

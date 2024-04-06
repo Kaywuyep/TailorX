@@ -1,9 +1,10 @@
 from django.contrib import admin
-from .models import Post, Client, Tailor, Picture
+from .models import Post, Client, Tailor, Picture, Profile
 from .models import Message, State, City, Place
 
-# Register your models here.
 
+admin.site.register(Profile)
+ 
 class PostAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Post Details', {'fields': ['title', 'author', 'body']}),
@@ -44,7 +45,7 @@ class PictureAdmin(admin.ModelAdmin):
         ('Image Details', {'fields': ['caption', 'image']}),
     ]
     list_display = ('tailor', 'caption', 'image',)
-    list_filter = ('uploaded_at',)  # Optional: Adds a filter sidebar
+    # list_filter = ('uploaded_at',)  # Optional: Adds a filter sidebar
 
 admin.site.register(Picture, PictureAdmin)
 

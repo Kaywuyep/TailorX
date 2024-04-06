@@ -3,6 +3,7 @@ import uuid
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
+#from django.utils import timezone
 from PIL import Image
 
 
@@ -129,6 +130,27 @@ class Tailor(BaseModel):
         return f"({self.user.username}) {self.user.email}"
 
 
+class Profile(BaseModel):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image =  models.ImageField(default='default.jpg', upload_to='profile_pics')
+    skills = models.TextField(max_length=1024, null=True, blank=False)
+    experience = models.IntegerField(blank=False, null=True)
+    certifications = models.TextField(blank=True)
+
+    def __str__(self):
+        return f'{self.user.username} Profile'
+    
+    def save(self):
+        super().save()
+
+        img = Image.open(self.image.path) # Open image
+
+        # resize image
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size) # Resize image
+            img.save(self.image.path) 
+
 class Message(models.Model):
     sender = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE)
     recipient = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE)
@@ -136,7 +158,7 @@ class Message(models.Model):
     content = models.TextField()
 
 
-class Post(models.Model):
+class Post(BaseModel):
     """
     this is our database model
     """
@@ -156,22 +178,30 @@ class Picture(models.Model):
     """
     A class representing pictures uploaded by tailors.
     """
-    tailor = models.ForeignKey(Tailor, related_name='pictures', on_delete=models.CASCADE)
+    # id = models.AutoField(primary_key=True)
+    tailor = models.ForeignKey(User, related_name='pictures', on_delete=models.CASCADE)
     title = models.CharField(max_length=255, blank=True)
     category = models.CharField(max_length=255, blank=True)
     caption = models.CharField(max_length=200, default="No caption provided")
     image = models.ImageField(upload_to='tailor_pictures')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
+    # uploaded_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         """
         Override the save method to ensure the image size is within 2MB.
         """
-        if self.image:
-            max_size = 2 * 1024 * 1024  # 2MB
-            if self.image.size > max_size:
+        super().save()
+
+        img = Image.open(self.image.path) # Open image
+
+        # resize image
+        if img.height > 1024 or img.width > 1024:
+            output_size = (1024, 1024)
+            img.thumbnail(output_size) # Resize image
+            img.save(self.image.path) 
+            max_size = output_size 
+            if self.image.path > max_size:
                 raise ValueError("Image size should be less than 2MB.")
-        super(Picture, self).save(*args, **kwargs)
 
     def __str__(self):
         """return a string rep of caption"""
