@@ -13,3 +13,16 @@ def create_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+
+@receiver(post_save, sender=User)
+def create_picture(sender, instance, created, **kwargs):
+    if created:
+        Picture.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_picture(sender, instance, **kwargs):
+    pictures = instance.pictures.all()
+    for picture in pictures:
+        picture.save()

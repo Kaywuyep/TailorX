@@ -9,10 +9,11 @@ from .models import Client, Tailor, Picture, State, Profile
 class ClientRegistrationForm(UserCreationForm):
     first_name = forms.CharField(max_length=128)
     last_name = forms.CharField(max_length=128)
+    address = forms.CharField()
 
     class Meta:
-        model = User
-        fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
+        model = Client
+        fields = ['username', 'first_name', 'last_name', 'address', 'password1', 'password2']
 
 class TailorRegistrationForm(UserCreationForm):
     first_name = forms.CharField(max_length=50)
@@ -42,16 +43,16 @@ class ProfileUpdateForm(forms.ModelForm):
     skills = forms.CharField(max_length=1024)
     experience = forms.IntegerField()
     certifications = forms.CharField()
+    phone_number = forms.CharField()
 
     class Meta:
         model = Profile
-        fields = ['image', 'skills', 'experience', 'certifications'] 
+        fields = ['image', 'skills', 'experience', 'certifications', 'phone_number'] 
 
 
-class PictureImageForm(forms.Form):
-    image = forms.ImageField(label="Portfolio Image")
+class PictureImageForm(forms.ModelForm):
     caption = forms.CharField(max_length=200)
 
-    class meta:    
-        models = Picture   
+    class Meta:    
+        model = Picture   
         fields = ['image', 'caption']

@@ -1,7 +1,8 @@
 from django.db import models
 import uuid
+#from django.contrib.auth.models import AbstractUser
 from datetime import datetime
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User #, Group
 from django.contrib.auth.hashers import make_password
 #from django.utils import timezone
 from PIL import Image
@@ -62,7 +63,11 @@ class Client(BaseModel):
     """
     A class representing a client user.
     """
+    #is_admin = models.BooleanField(default=False)
+    #is_tailor = models.BooleanField(default=False)
+    #USERNAME_FIELD = 'username'
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    #groups = models.ManyToManyField(Group, related_name='client_groups', on_delete=models.CASCADE)
     first_name = models.CharField(max_length=128, blank=False, null=False)
     last_name = models.CharField(max_length=128, blank=False, null=False)
     username = models.CharField(max_length=150, unique=True, blank=False, null=True)
@@ -88,7 +93,7 @@ class Client(BaseModel):
         """
         Returns a string representation of the Client instance.
         """
-        return f"[Client] ({self.user.username}) {self.user.email}"
+        return f"[Client] ({self.username})"
 
 
 class Tailor(BaseModel):
@@ -103,7 +108,7 @@ class Tailor(BaseModel):
     address = models.TextField(default='Unknown', blank=False, null=False)
     # location = models.CharField(max_length=255, default='Unknown', blank=False, null=False)
     location = models.ForeignKey('State', on_delete=models.SET_NULL, null=True, blank=False)
-    tailor_pictures = models.ManyToManyField('Picture', related_name='tailor_pictures', blank=True)
+    tailor_pictures = models.ManyToManyField('Picture', related_name='tailors', blank=True)
     skills = models.TextField(max_length=1024, null=True, blank=False)
     experience = models.IntegerField(blank=False, null=True)
     certifications = models.TextField(blank=True)
@@ -136,12 +141,13 @@ class Profile(BaseModel):
     skills = models.TextField(max_length=1024, null=True, blank=False)
     experience = models.IntegerField(blank=False, null=True)
     certifications = models.TextField(blank=True)
+    phone_number = models.TextField(max_length=14, blank=False, null=True)
 
     def __str__(self):
         return f'{self.user.username} Profile'
     
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
         img = Image.open(self.image.path) # Open image
 
@@ -179,7 +185,7 @@ class Picture(models.Model):
     A class representing pictures uploaded by tailors.
     """
     # id = models.AutoField(primary_key=True)
-    tailor = models.ForeignKey(User, related_name='pictures', on_delete=models.CASCADE)
+    tailor = models.ForeignKey(User, related_name='pictures', on_delete=models.CASCADE, blank=False, null=True)
     title = models.CharField(max_length=255, blank=True)
     category = models.CharField(max_length=255, blank=True)
     caption = models.CharField(max_length=200, default="No caption provided")
@@ -190,7 +196,7 @@ class Picture(models.Model):
         """
         Override the save method to ensure the image size is within 2MB.
         """
-        super().save()
+        super().save(*args, **kwargs)
 
         img = Image.open(self.image.path) # Open image
 
@@ -204,7 +210,9 @@ class Picture(models.Model):
                 raise ValueError("Image size should be less than 2MB.")
 
     def __str__(self):
-        """return a string rep of caption"""
+        """
+        return a string rep of caption
+        """
         return self.caption
 
 

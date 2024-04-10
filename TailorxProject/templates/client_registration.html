@@ -73,23 +73,12 @@
                 <div class="col-sm-8 col-md-6 col-lg-10 col-xl-8" data-zanim-xs='{"delay":0.5,"animation":"slide-right"}' data-zanim-trigger="scroll">
                   <h3 class="display-4 fs-7">Welcome,<br />we are glad to have you join us.</h3>
                   <h6 class="text-danger mt-3">TalorX is specially crafted for you &amp; your tailoring needs</h6>
-                  <form method="POST" action="{% url 'login' %}" class="mt-5 signup-form">
+                  <form method="POST" action="{% url 'register_client' %}" class="mt-5 signup-form">
+                    {% csrf_token %}
                     <div class="row gy-4 align-items-center mb-4">
-                      <div class="col-12"><input class="form-control form-group bg-light" type="text" name="username" placeholder="Username" /></div>
-                      <div class="col-12"><input class="form-control form-group bg-light" type="email" name="email" placeholder="Email Address" /></div>
-		      <div class="col-6"><input class="form-control form-group bg-light" type="text" name="first_name" placeholder="First Name" required /></div>
-    <div class="col-6"><input class="form-control form-group bg-light" type="text" name="last_name" placeholder="Last Name" required /></div>
-    <div class="col-12"><input class="form-control form-group bg-light" type="text" name="address" placeholder="Address" required /></div>
-    <div class="col-6">
-      <select class="form-select bg-light" aria-label="Select State" required>
-        <option value="">Select State</option>
-        {% for state in states %}
-        <option value="{{ state.id }}">{{ state.name }}</option>
-        {% endfor %}
-      </select>
-    </div>
-                      <div class="col-12"><input class="form-control form-group bg-light" type="password" name="password" placeholder="Password" /></div>
-                      <div class="col-12"><input class="form-control form-group bg-light" type="password" name="confirm_password" placeholder="Confirm Password" /></div>
+                      <fieldset class="form-control form-group bg-light">
+                        {{ form.as_p }}
+                      </fieldset>
                     </div>
                     <div class="row mb-4 align-items-center">
                       <div class="col-auto d-grid"><input class="btn btn-dark" type="submit" name="submit" value="Create an Account" /></div>
