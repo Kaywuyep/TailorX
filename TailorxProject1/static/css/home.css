@@ -1,0 +1,38 @@
+/* Styles for header */
+header {
+    position: fixed; /* Position the header at the top of the viewport */
+    top: 0; /* Align the header to the top */
+    left: 0; /* Align the header to the left */
+    width: 100%; /* Make the header take the full width of the viewport */
+    background-color: transparent;
+    padding: 0;
+    text-align: center;
+    display: flex;
+
+    color: blue;
+    font-family: "Times New Roman", Times, serif;
+}
+
+body {
+    background-image: url('static/img/homepage.png');
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    background-attachment: fixed;
+    /* Set background to cover the entire viewport height */
+    height: 100vh;
+    /* Remove margin and padding to ensure the image covers the entire page */
+    margin: 0;
+    padding: 0;
+}
+
+/*
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    padding: 5px;
+    text-align: center;
+    font-size: small;
+}*/
