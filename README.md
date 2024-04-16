@@ -17,7 +17,7 @@ CATHERINE R. WUYEP: a Software Developer, passionate about using her skills to m
 
 ##### INSTALLATION AND USAGE
 
-TailorX is a web-based application and doeasn't require any inatallation on your device, simply vist the deployed site through your favorite browser.
+TailorX is a web-based application and doeasn't require any installation on your device, simply vist the deployed site through your favorite browser.
 
 - USAGE
 1. Create an Account: SignUp for a free account as either a client or a tailor.
