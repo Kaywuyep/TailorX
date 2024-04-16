@@ -1,5 +1,6 @@
 ## TAILORX
 
+![Screenshot 2024-04-08 110541](https://github.com/Kaywuyep/TailorX/assets/133151190/23afbcb1-ce10-4b8d-96dd-dc9c907acdc1)
 
 
 #### INDRODUCTION
